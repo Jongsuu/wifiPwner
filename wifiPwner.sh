@@ -82,6 +82,8 @@ function configureNetworkCard() {
   airmon-ng start $network_card
   ifconfig ${network_card}mon down && macchanger -a ${network_card}mon > /dev/null
   ifconfig ${network_card}mon up
+  
+  killall wpa_supplicant dhclient 2>/dev/null
 
   echo -e "${yellowColour}[*] New MAC address assigned: ${endColour}${purpleColour}$(macchanger -s ${netword_card}mon | 
   grep -i current | xargs | cut -d ' ' -f '3-100')${endColour}"
